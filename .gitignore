@@ -3,3 +3,4 @@ __pycache__/
 .history/
 Datasets/
 text_dataset
+kerasOCR_env/
