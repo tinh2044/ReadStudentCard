@@ -26,7 +26,7 @@ Apply CNN, Bi-LSTM ,and CTC loss architecture to build OCR model.
 - Result of model
 <img src="./Images/result_ocr.png">
 ## Run Project
- - Clone repo to your local machine and move to it
+- Clone repo to your local machine and move to it
 ```Terminal
 git clone git@github.com:tinh2044/ReadStudentCard.git
 cd ./ReadStudentCard
