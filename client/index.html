@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="POST">
+      <input type="file" name="file" multiple />
+      <button type="submit">Upload</button>
+    </form>
+    <div class="content">
+
+    </div>
+  </body>
+
+  <script>
+    const form = document.querySelector("form");
+    let data = null
+    form.addEventListener("submit", handleSubmit);
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      uploadFiles();
+    }
+    async function uploadFiles() {
+      const url = "http://127.0.0.1:8000/get-info/";
+      const formData = new FormData(form);
+
+      const fetchOptions = {
+        method: "post",
+        body: formData,
+      };
+
+      // fetch(url, fetchOptions)
+      //         .then(res => res.json())
+      //         .then(res => {
+      //           console.log(res)
+      //           document.getElementById('card').src = "data:image/jpeg;base64," + res.card;
+      //           document.getElementById('avatar').src = "data:image/jpeg;base64," + res.avatar;
+      //           document.getElementById('qr-code').src = "data:image/jpeg;base64," + res.qr_code;
+      //         });
+
+      data = await fetch(url, fetchOptions).then(res => res.json())
+      // (data)
+      textExtract = data.text_extract
+      let contentTag = document.querySelector('.content')
+
+          contentTag.innerHTML = textExtract.map((item, i) => `<div class="item" >
+              <p>${item.text}</p>
+              <img src="data:image/jpeg;base64,${item.image}" alt="img"/>
+          </div > `).join(" ")
+
+    }
+  </script>
+</html>
